@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0 (Python 3.9.6 on win32)" generated="2024-04-10T21:50:31.269504" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Suite" source="C:\robotapi\test_suite">
+<suite id="s1-s1" name="Testsuite" source="C:\robotapi\test_suite\testsuite.robot">
+<test id="s1-s1-t1" name="Retrieve test cases from API" line="11">
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-04-10T21:50:31.470507" level="INFO">POST Request : url=http://127.0.0.1:8000/testai/tests/v1/execute 
+ path_url=/testai/tests/v1/execute 
+ headers={'User-Agent': 'python-requests/2.31.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2024-04-10T21:50:31.470507" level="INFO">POST Response : url=http://127.0.0.1:8000/testai/tests/v1/execute 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 10 Apr 2024 16:20:31 GMT', 'Server': 'WSGIServer/0.2 CPython/3.9.6', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'POST, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '130', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body={"tests":[{"title":"Open google.com","steps":[["Open Browser","https://google.com","Firefox"],["Sleep","2s"],["Close Browser"]]}]} 
+ </msg>
+<msg time="2024-04-10T21:50:31.470507" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${URL}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2024-04-10T21:50:31.466603" elapsed="0.003904"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-04-10T21:50:31.471549" level="INFO">${test_title} = Open google.com</msg>
+<var>${test_title}</var>
+<arg>${response.json()}[tests][0][title]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-04-10T21:50:31.470507" elapsed="0.001042"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-04-10T21:50:31.471549" level="INFO">${steps} = [['Open Browser', 'https://google.com', 'Firefox'], ['Sleep', '2s'], ['Close Browser']]</msg>
+<var>${steps}</var>
+<arg>${response.json()}[tests][0][steps]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-04-10T21:50:31.471549" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2024-04-10T21:50:31.472581" level="INFO">Length is 3.</msg>
+<msg time="2024-04-10T21:50:31.472581" level="INFO">${no_keywords} = 3</msg>
+<var>${no_keywords}</var>
+<arg>${steps}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2024-04-10T21:50:31.472581" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${test_title}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-04-10T21:50:31.472581" elapsed="0.000000"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2024-04-10T21:50:31.473498" level="INFO">Length is 3.</msg>
+<msg time="2024-04-10T21:50:31.473498" level="INFO">${len} = 3</msg>
+<var>${len}</var>
+<arg>${index}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2024-04-10T21:50:31.473498" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${len} == 3">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-04-10T21:50:31.474529" level="INFO">Opening browser 'Firefox' to base url 'https://google.com'.</msg>
+<arg>${index}[1]</arg>
+<arg>${index}[2]</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-04-10T21:50:31.474529" elapsed="9.761746"/>
+</kw>
+<arg>${index}[0]</arg>
+<arg>${index}[1]</arg>
+<arg>${index}[2]</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2024-04-10T21:50:31.473498" elapsed="9.762777"/>
+</kw>
+<status status="PASS" start="2024-04-10T21:50:31.473498" elapsed="9.762777"/>
+</branch>
+<status status="PASS" start="2024-04-10T21:50:31.473498" elapsed="9.762777"/>
+</if>
+<if>
+<branch type="IF" condition="${len} == 2">
+<kw name="Run Keyword" owner="BuiltIn">
+<arg>${index}[0]</arg>
+<arg>${index}[1]</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="NOT RUN" start="2024-04-10T21:50:41.236275" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-04-10T21:50:41.236275" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-04-10T21:50:41.236275" elapsed="0.000000"/>
+</if>
+<if>
+<branch type="IF" condition="${len} == 1">
+<kw name="Run Keyword" owner="BuiltIn">
+<arg>${index}[0]</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="NOT RUN" start="2024-04-10T21:50:41.236275" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-04-10T21:50:41.236275" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-04-10T21:50:41.236275" elapsed="0.000000"/>
+</if>
+<var name="${index}">['Open Browser', 'https://google.com', 'Firefox']</var>
+<status status="PASS" start="2024-04-10T21:50:31.473498" elapsed="9.762777"/>
+</iter>
+<iter>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2024-04-10T21:50:41.236275" level="INFO">Length is 2.</msg>
+<msg time="2024-04-10T21:50:41.236275" level="INFO">${len} = 2</msg>
+<var>${len}</var>
+<arg>${index}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2024-04-10T21:50:41.236275" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${len} == 3">
+<kw name="Run Keyword" owner="BuiltIn">
+<arg>${index}[0]</arg>
+<arg>${index}[1]</arg>
+<arg>${index}[2]</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="NOT RUN" start="2024-04-10T21:50:41.236275" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-04-10T21:50:41.236275" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-04-10T21:50:41.236275" elapsed="0.000000"/>
+</if>
+<if>
+<branch type="IF" condition="${len} == 2">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-04-10T21:50:43.240390" level="INFO">Slept 2 seconds.</msg>
+<arg>${index}[1]</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-04-10T21:50:41.236275" elapsed="2.004115"/>
+</kw>
+<arg>${index}[0]</arg>
+<arg>${index}[1]</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2024-04-10T21:50:41.236275" elapsed="2.004115"/>
+</kw>
+<status status="PASS" start="2024-04-10T21:50:41.236275" elapsed="2.004115"/>
+</branch>
+<status status="PASS" start="2024-04-10T21:50:41.236275" elapsed="2.004115"/>
+</if>
+<if>
+<branch type="IF" condition="${len} == 1">
+<kw name="Run Keyword" owner="BuiltIn">
+<arg>${index}[0]</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="NOT RUN" start="2024-04-10T21:50:43.240390" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-04-10T21:50:43.240390" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-04-10T21:50:43.240390" elapsed="0.000000"/>
+</if>
+<var name="${index}">['Sleep', '2s']</var>
+<status status="PASS" start="2024-04-10T21:50:41.236275" elapsed="2.004115"/>
+</iter>
+<iter>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2024-04-10T21:50:43.240390" level="INFO">Length is 1.</msg>
+<msg time="2024-04-10T21:50:43.240390" level="INFO">${len} = 1</msg>
+<var>${len}</var>
+<arg>${index}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2024-04-10T21:50:43.240390" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${len} == 3">
+<kw name="Run Keyword" owner="BuiltIn">
+<arg>${index}[0]</arg>
+<arg>${index}[1]</arg>
+<arg>${index}[2]</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="NOT RUN" start="2024-04-10T21:50:43.240390" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-04-10T21:50:43.240390" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-04-10T21:50:43.240390" elapsed="0.000000"/>
+</if>
+<if>
+<branch type="IF" condition="${len} == 2">
+<kw name="Run Keyword" owner="BuiltIn">
+<arg>${index}[0]</arg>
+<arg>${index}[1]</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="NOT RUN" start="2024-04-10T21:50:43.240390" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-04-10T21:50:43.240390" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2024-04-10T21:50:43.240390" elapsed="0.000000"/>
+</if>
+<if>
+<branch type="IF" condition="${len} == 1">
+<kw name="Run Keyword" owner="BuiltIn">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2024-04-10T21:50:43.240390" elapsed="2.722422"/>
+</kw>
+<arg>${index}[0]</arg>
+<doc>Executes the given keyword with the given arguments.</doc>
+<status status="PASS" start="2024-04-10T21:50:43.240390" elapsed="2.722422"/>
+</kw>
+<status status="PASS" start="2024-04-10T21:50:43.240390" elapsed="2.722422"/>
+</branch>
+<status status="PASS" start="2024-04-10T21:50:43.240390" elapsed="2.722422"/>
+</if>
+<var name="${index}">['Close Browser']</var>
+<status status="PASS" start="2024-04-10T21:50:43.240390" elapsed="2.722422"/>
+</iter>
+<var>${index}</var>
+<value>@{steps}</value>
+<status status="PASS" start="2024-04-10T21:50:31.473498" elapsed="14.489314"/>
+</for>
+<status status="PASS" start="2024-04-10T21:50:31.465521" elapsed="14.497291"/>
+</test>
+<status status="PASS" start="2024-04-10T21:50:31.290367" elapsed="14.682253"/>
+</suite>
+<status status="PASS" start="2024-04-10T21:50:31.270502" elapsed="14.704055"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Test Suite">Test Suite</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="Testsuite">Test Suite.Testsuite</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

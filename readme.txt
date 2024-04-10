@@ -26,7 +26,8 @@ python manage.py runserver
 and since the robot test suite is in the project folder, for executing the testsuite we execute the following command in the new terminal
 robot -d robot_test_results test_suite
 
-Here robot_test_results is folder that contains all the reports and logs after running the robot command
+Here robot_test_results is a folder that contains all the reports and logs after running the robot command
+One of the test cases are already there for your reference.
 *********************************************************************************************************
 
 I would also like to mention here, as per the challenge, i have made minor changes in the structure of json data.
